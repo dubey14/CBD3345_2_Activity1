@@ -31,4 +31,4 @@ if __name__ == '__main__':
     model = create_regression_model(X_train.shape[1:])
     train_regression_model(model, X_train, y_train, epochs=1, batch_size=32)
     
-    app.run(debug=True,port=8080)
+    app.run(port=5000)

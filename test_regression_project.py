@@ -5,6 +5,7 @@ from src.data_preparation import generate_regression_data
 from src.model import create_regression_model
 from src.train import train_regression_model
 from src.predict import predict_regression
+import coverage
 
 @pytest.fixture
 def regression_data():
@@ -38,4 +39,11 @@ def test_regression_model_prediction(regression_model):
     assert isinstance(predicted_value, np.ndarray)
 
 if __name__ == '__main__':
+    # Use coverage to run pytest with coverage analysis
+    import coverage
+    cov = coverage.Coverage(source=["src"])  # Specify the source directory
+    cov.start()  # Start coverage measurement
     pytest.main()
+    cov.stop()  # Stop coverage measurement
+    cov.save()  # Save coverage data to a file
+    cov.report()  # Generate and print coverage report
