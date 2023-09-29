@@ -24,7 +24,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pytest-results-${{ github.run_number }}
-          path: junit/test-results-${{ github.run_number }}.xml
+          path: |
+                junit/test-results-${{ github.run_number }}.xml
+                htmlcov/*                
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
