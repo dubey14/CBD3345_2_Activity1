@@ -1,0 +1,27 @@
+name: Python Build
+
+on:
+  push:
+    branches:
+      - Vidhi  # Change to your project's main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can choose other platforms if needed
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x  # Specify your Python version
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Build
+      run: python your_build_script.py  # Replace with your actual build script
+
+    # Add more steps for testing, linting, etc. as needed
