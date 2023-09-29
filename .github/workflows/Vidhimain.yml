@@ -35,7 +35,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@main
         with:
           image: gcr.io/${{ secrets.GCP_PROJECT }}/python-code:latest
-          service: app1
+          service: python-app
           region: us-west2
           platform: managed
           allow-unauthenticated: true
