@@ -10,5 +10,6 @@ COPY . /app
 # Install any project dependencies (if you have a requirements.txt file)
 RUN pip install numpy tensorflow flask
 
+EXPOSE 8080
 # Run your Python script
 CMD ["python", "main.py"]  

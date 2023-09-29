@@ -19,12 +19,12 @@ jobs:
       - name: Installing all our dependencies
         run: pip install numpy tensorflow flask pytest pytest-cov
       - name: Test with pytest
-        run: pytest test_regression_project.py --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
+        run: pytest test_regression_project.py --doctest-modules --junitxml=junit/test-results-${{ github.run_number }}.xml
       - name: Upload pytest test results
         uses: actions/upload-artifact@v3
         with:
-          name: pytest-results-${{ matrix.python-version }}
-          path: junit/test-results-${{ matrix.python-version }}.xml
+          name: pytest-results-${{ github.run_number }}
+          path: junit/test-results-${{ github.run_number }}.xml
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -43,4 +43,14 @@ jobs:
           tags: gcr.io/${{ secrets.GCP_PROJECT }}/python-code:latest
           build-args: |
             HTTP_PORT=8080
-
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@main
+        with:
+          image: gcr.io/${{ secrets.GCP_PROJECT }}/app1:latest
+          service: app1
+          region: us-west2
+          platform: managed
+          allow-unauthenticated: true
+          env_vars: |
+            FOO=bar
+            ZIP=zap
