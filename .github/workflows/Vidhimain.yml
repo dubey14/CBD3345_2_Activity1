@@ -26,7 +26,8 @@ jobs:
           name: pytest-results-${{ github.run_number }}
           path: |
                 junit/test-results-${{ github.run_number }}.xml
-                htmlcov/*                
+                htmlcov/*.html                
+                htmlcov/*.js                
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
