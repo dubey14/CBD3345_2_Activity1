@@ -8,8 +8,8 @@ WORKDIR /app
 COPY . /app
 
 # Install any project dependencies (if you have a requirements.txt file)
-RUN pip install numpy tensorflow flask
+RUN pip install numpy tensorflow flask gunicorn
 
 EXPOSE 5000
 # Run your Python script
-CMD ["python", "main.py"]  
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app

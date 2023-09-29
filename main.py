@@ -5,6 +5,7 @@ from src.data_preparation import generate_regression_data
 from src.model import create_regression_model
 from src.train import train_regression_model
 from src.predict import predict_regression
+import os
 
 app = Flask(__name__)
 
@@ -31,4 +32,4 @@ if __name__ == '__main__':
     model = create_regression_model(X_train.shape[1:])
     train_regression_model(model, X_train, y_train, epochs=1, batch_size=32)
     
-    app.run(port=5000)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
