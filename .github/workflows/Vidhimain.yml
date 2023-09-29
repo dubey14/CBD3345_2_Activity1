@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'build_log.txt'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -46,15 +44,3 @@ jobs:
           build-args: |
             HTTP_PORT=8080
 
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@main
-        with:
-          image: gcr.io/${{ secrets.GCP_PROJECT }}/python-code:latest
-          service: python-app
-          region: us-west2
-          platform: managed
-          allow-unauthenticated: true
-          memory: 1Gi
-          env_vars: |
-              FOO=bar
-              ZIP=zap
